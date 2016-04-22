@@ -8,16 +8,19 @@ Forme.prototype.paint = function(ctx){
 
 Formes.prototype.updateList = function(forme){
 	var li;
+    var type;
 	if(forme instanceof Ligne){
-		li = "<li data-index='"+this.formes.indexOf(forme)+"' style='color:"+forme.couleur+"'>Ligne  <i class='fa fa-remove' /></li>";
-		$("#shapeList ul").append(li);
+        type = "Ligne";
 	}else{
-		li = "<li data-index='"+this.formes.indexOf(forme)+"' style='color:"+forme.couleur+"'>Rectangle  <i class='fa fa-remove' /></li>";
-		$("#shapeList ul").append(li);
+        type = "Rectangle";
 	}
-	li.on("click", function(){
-		drawing.splice($(this).parent("li").data("index"), 1);
-		$(this).parent("li").remove();
+    li = $("<li style='color:"+forme.couleur+"'>"+type+"  <i class='fa fa-remove' /></li>");
+    $("#shapeListUl").append(li);
+    li.on("click", () => {
+		drawing.formes.splice(this.formes.indexOf(forme), 1);
+		li.slideUp(300, function() {
+            li.remove();
+        });
 		drawing.paint(ctx, canvas);
 	});
 }

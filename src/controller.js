@@ -21,7 +21,7 @@ class Pencil {
         });
 
         $("#spinnerWidth").change(() => {
-        	this.currLineWidth = $(this).val();
+        	this.currLineWidth = $("#spinnerWidth").val();
         });
 
         $("#colour").change(() => {

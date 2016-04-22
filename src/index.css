@@ -1,6 +1,12 @@
 
 .myCanvas {
 	margin-left:100px;
+    display: inline-block;
+    float: left;
+}
+
+#shapeList {
+    float: left;
 }
 
 .cf:before,.cf:after{content:"";display:table}.cf:after{clear:both}.cf{zoom:1}
