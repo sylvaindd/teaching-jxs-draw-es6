@@ -5,8 +5,9 @@
     float: left;
 }
 
-#shapeList {
+#right{
     float: left;
+    margin-left: 10px;
 }
 
 .cf:before,.cf:after{content:"";display:table}.cf:after{clear:both}.cf{zoom:1}

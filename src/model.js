@@ -16,11 +16,16 @@ class Formes{
     constructor() {
         this.formes = new Array();
         this.addForme = this.addForme.bind(this);
+        this.clear = this.clear.bind(this);
     }
 
     addForme(forme){
         this.formes.push(forme);
         this.updateList(forme);
+    }
+    
+    clear(){
+        this.formes = new Array();
     }
 
 }

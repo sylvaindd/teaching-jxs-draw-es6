@@ -1,6 +1,37 @@
 
 // Implémenter ici les fonctions paint à ajouter dans chacune des classes du modèle.
 
+$("#buttonRainbow").click(function () {
+	clear(addRainbow);
+});
+
+var addRainbow = function(){
+	var colors = ["#78dbe9", "#00e5a5", "#24e340", "#5ee33c", "#a3e444", "#cde539", "#e9db3a", "#e9ca39", "#eaa43e", "#eb7d42", "#eb4d3a", "#eb3e62", "#eb3c8e", "#eb47b9", "#eb51d0", "#d950e9", "#b84ee9", "#814ae9", "#5046e9", "#3866e9", "#3392e9", "#42b6e9", "#40d3e9"];
+	var separator = 10;
+	$.each(colors, function (k, v) {
+		drawing.addForme(new Rectangle(5 + k * separator, 5 + k * separator, canvas.width - (5 + k * separator) * 2, canvas.height - (5 + k * separator) * 2, 5, colors[k]));
+	});
+
+	drawing.paint(ctx, canvas);
+    $("#shapeListUl").slideDown(300);
+}
+
+$("#buttonClear").click(function(){
+   clear();
+   drawing.paint(ctx, canvas);
+});
+
+var clear = function(callback){
+    drawing.clear();
+    $("#shapeListUl").slideUp(300, function() {
+        $(this).find("li").remove();
+        if(callback != null)
+		  callback();
+        else
+            $(this).show();
+    });
+}
+
 Forme.prototype.paint = function(ctx){
 	ctx.lineWidth = this.epaisseur;
 	ctx.strokeStyle = this.couleur;
@@ -14,9 +45,9 @@ Formes.prototype.updateList = function(forme){
 	}else{
         type = "Rectangle";
 	}
-    li = $("<li style='color:"+forme.couleur+"'>"+type+"  <i class='fa fa-remove' /></li>");
+    li = $("<li style='color:"+forme.couleur+";'>"+type+"  <i class='fa fa-remove' /></li>");
     $("#shapeListUl").append(li);
-    li.on("click", () => {
+    li.find("i").on("click", () => {
 		drawing.formes.splice(this.formes.indexOf(forme), 1);
 		li.slideUp(300, function() {
             li.remove();
